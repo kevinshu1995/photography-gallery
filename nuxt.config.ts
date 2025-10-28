@@ -7,5 +7,9 @@ export default defineNuxtConfig({
     modules: ["@nuxt/content", "@nuxt/eslint", "@nuxt/image", "@nuxt/scripts", "@nuxt/ui"],
 
     css: ["~/assets/css/index.css"],
+
+    colorMode: {
+        preference: "light",
+    },
 });
 
