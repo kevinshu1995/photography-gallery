@@ -1,7 +1,7 @@
 backend:
     name: github
     repo: kevinshu1995/photography-gallery
-    base_url: photograph-oauth.hsiu.soy
+    base_url: https://photograph-oauth.hsiu.soy
 
 media_folder: public/img
 public_folder: /img
