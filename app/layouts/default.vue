@@ -1,7 +1,10 @@
 <template>
     <div>
-        <AppHeader />
         <slot />
+
+        <AppLinkBubble />
+
+        <AppFooter />
     </div>
 </template>
 
