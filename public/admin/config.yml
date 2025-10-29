@@ -9,17 +9,18 @@ media_folder: public/img
 public_folder: /img
 
 collections:
-    - name: "blog"
-      label: "Blog"
-      folder: "content/blog"
-      format: "frontmatter"
-      create: true
-      slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-      editor:
-          preview: false
+    - name: "gallery"
+      label: "相簿管理"
+      folder: "content/gallery"
+      extension: "json"
+      format: "json"
+      identifier_field: "filename"
       fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Publish Date", name: "date", widget: "datetime" }
-          - { label: "Description", name: "description", widget: "string" }
-          - { label: "Body", name: "body", widget: "markdown" }
+          - { label: "圖片路徑", name: "image", widget: "image", media_folder: "/public/img", allow_multiple: false, readonly: true }
+          - { label: "描述", name: "description", widget: "text", required: false }
+          - { label: "拍攝日期", name: "date", widget: "datetime", required: false }
+          - { label: "標籤", name: "tags", widget: "list", allow_add: true, allow_remove: true, required: false }
+          - { label: "位置", name: "location", widget: "string", required: false }
+          - { label: "發佈", name: "published", widget: "boolean", default: true, required: true }
+          - { label: "權重", name: "weight", widget: "number", value_type: "int", required: false, default: 0 }
 

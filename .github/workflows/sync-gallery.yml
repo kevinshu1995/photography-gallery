@@ -1,0 +1,35 @@
+name: Sync Gallery Images
+
+on:
+    push:
+        branches: [main, master]
+        paths:
+            - "public/img/**"
+    workflow_dispatch:
+
+jobs:
+    sync-images:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+                  token: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+
+            - name: Scan and create metadata files
+              run: |
+                  node scripts/sync-gallery-metadata.js
+
+            - name: Commit metadata changes
+              run: |
+                  git config --local user.email "kevinshu1995@gmail.com"
+                  git config --local user.name "wenshiu.hsu"
+                  git add content/gallery/*.json
+                  git diff --staged --quiet || git commit -m "chore: auto-sync gallery metadata [skip ci]"
+                  git push
+
