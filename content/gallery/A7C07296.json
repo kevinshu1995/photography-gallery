@@ -5,5 +5,22 @@
   "tags": [],
   "location": "",
   "published": true,
-  "weight": 0
+  "weight": 0,
+  "DateTime": "2025:06:23 00:17:05",
+  "DateTimeOriginal": "2025:05:17 16:23:11",
+  "DateTimeDigitized": "2025:05:17 16:23:11",
+  "ExposureTime": "1/250",
+  "FNumber": "f/2.2",
+  "ExposureMode": "Auto exposure",
+  "ExposureProgram": "Aperture priority",
+  "ISOSpeedRatings": 125,
+  "Copyright": "WEN-HSIU HSU",
+  "Artist": "WEN-HSIU HSU",
+  "Make": "SONY",
+  "LensSpecification": "55-55 mm f/1.8",
+  "Model": "ILCE-7C",
+  "Orientation": "top-left",
+  "PixelXDimension": 3504,
+  "PixelYDimension": 5267,
+  "FocalLength": "55 mm"
 }
