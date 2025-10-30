@@ -23,4 +23,20 @@ collections:
           - { label: "位置", name: "location", widget: "string", required: false }
           - { label: "發佈", name: "published", widget: "boolean", default: true, required: true }
           - { label: "權重", name: "weight", widget: "number", value_type: "int", required: false, default: 0 }
+          - { label: "編輯時間", name: "editedTime", widget: "string", required: false, readonly: true }
+          - { label: "拍攝時間", name: "DateTimeOriginal", widget: "string", required: false, readonly: true }
+          - { label: "拍攝時間", name: "DateTimeDigitized", widget: "string", required: false, readonly: true }
+          - { label: "快門", name: "ExposureTime", widget: "string", required: false, readonly: true }
+          - { label: "光圈", name: "FNumber", widget: "string", required: false, readonly: true }
+          - { label: "曝光模式", name: "ExposureMode", widget: "string", required: false, readonly: true }
+          - { label: "曝光模式", name: "ExposureProgram", widget: "string", required: false, readonly: true }
+          - { label: "ISO", name: "ISOSpeedRatings", widget: "string", required: false, readonly: true }
+          - { label: "Copyright", name: "Copyright", widget: "string", required: false, readonly: true }
+          - { label: "Artist", name: "Artist", widget: "string", required: false, readonly: true }
+          - { label: "相機品牌", name: "Make", widget: "string", required: false, readonly: true }
+          - { label: "相機型號", name: "LensSpecification", widget: "string", required: false, readonly: true }
+          - { label: "方向", name: "Orientation", widget: "string", required: false, readonly: true }
+          - { label: "像素寬度", name: "PixelXDimension", widget: "string", required: false, readonly: true }
+          - { label: "像素高度", name: "PixelYDimension", widget: "string", required: false, readonly: true }
+          - { label: "焦距", name: "FocalLength", widget: "string", required: false, readonly: true }
 
