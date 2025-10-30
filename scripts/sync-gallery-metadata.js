@@ -9,6 +9,23 @@ const __dirname = path.dirname(__filename);
 const IMAGE_FOLDER = path.join(__dirname, "../public/img");
 const METADATA_FOLDER = path.join(__dirname, "../content/gallery");
 
+function formatDateString(dateStr) {
+    if (!dateStr || dateStr.trim() === "") {
+        return "";
+    }
+
+    const formatted = dateStr.replace(/^(\d{4}):(\d{2}):(\d{2})/, "$1-$2-$3");
+
+    // 可選: 驗證日期是否有效
+    const date = new Date(formatted);
+    if (isNaN(date.getTime())) {
+        console.warn("Invalid date format:", dateStr);
+        return "";
+    }
+
+    return formatted;
+}
+
 /**
  * 從 EXIF 數據中提取有用的資訊
  */
@@ -35,6 +52,11 @@ function extractExifData(tags) {
 
     try {
         Object.keys(exif).forEach(key => {
+            // 調整至正確格式
+            if (["DateTime", "DateTimeOriginal", "DateTimeDigitized"].includes(key)) {
+                exif[key] = formatDateString(tags?.exif?.[key]?.description ?? null);
+                return;
+            }
             exif[key] = tags?.exif?.[key]?.description ?? null;
         });
     } catch (error) {

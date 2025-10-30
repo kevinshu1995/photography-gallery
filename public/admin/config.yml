@@ -34,8 +34,9 @@ collections:
           - { label: "Copyright", name: "Copyright", widget: "string", required: false, readonly: true }
           - { label: "Artist", name: "Artist", widget: "string", required: false, readonly: true }
           - { label: "相機品牌", name: "Make", widget: "string", required: false, readonly: true }
-          - { label: "相機型號", name: "LensSpecification", widget: "string", required: false, readonly: true }
+          - { label: "鏡頭規格", name: "LensSpecification", widget: "string", required: false, readonly: true }
           - { label: "方向", name: "Orientation", widget: "string", required: false, readonly: true }
+          - { label: "相機型號", name: "Model", widget: "string", required: false, readonly: true }
           - { label: "像素寬度", name: "PixelXDimension", widget: "string", required: false, readonly: true }
           - { label: "像素高度", name: "PixelYDimension", widget: "string", required: false, readonly: true }
           - { label: "焦距", name: "FocalLength", widget: "string", required: false, readonly: true }

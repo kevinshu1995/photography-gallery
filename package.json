@@ -17,6 +17,7 @@
     "@nuxt/ui": "4.1.0",
     "@unhead/vue": "^2.0.19",
     "better-sqlite3": "^12.4.1",
+    "dayjs": "^1.11.18",
     "eslint": "^9.38.0",
     "exifreader": "^4.32.0",
     "nuxt": "^4.2.0",

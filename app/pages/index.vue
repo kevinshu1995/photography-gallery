@@ -11,9 +11,9 @@
                 <p>Turning moments into memories.</p>
             </div>
         </header>
-        <div v-if="gallery && gallery.length > 0" class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-            <BaseImage v-for="item in gallery" :key="item.image" :src="item.image" :alt="item.image" :item="item" />
-        </div>
+        <ul v-if="gallery && gallery.length > 0" class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+            <BaseImage v-for="item in gallery" :key="item.image" :src="item.image" :alt="item.image" :detail="item" as="li" />
+        </ul>
     </UContainer>
 </template>
 
