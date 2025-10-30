@@ -12,7 +12,7 @@
             </div>
         </header>
         <div v-if="gallery && gallery.length > 0" class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-            <img v-for="item in gallery" :key="item.image" :src="item.image" :alt="item.image" loading="lazy" />
+            <BaseImage v-for="item in gallery" :key="item.image" :src="item.image" :alt="item.image" :item="item" />
         </div>
     </UContainer>
 </template>
@@ -20,7 +20,7 @@
 <script lang="ts" setup>
 // useAsyncData 在 SSG build 時會執行，資料會被寫入靜態 HTML
 const { data: gallery } = await useAsyncData("gallery-images", () => {
-    return queryCollection("gallery").all();
+    return queryCollection("gallery").where("published", "=", true).all();
 });
 </script>
 
