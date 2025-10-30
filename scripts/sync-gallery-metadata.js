@@ -2,6 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 import ExifReader from "exifreader";
+import { nanoid } from "nanoid";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +25,38 @@ function formatDateString(dateStr) {
     }
 
     return formatted;
+}
+
+/**
+ * 將字串轉換為安全的 HTML id（slugify）
+ */
+function slugify(text) {
+    return text
+        .toLowerCase() // 轉小寫
+        .normalize("NFD") // 將 unicode 字元標準化
+        .replace(/[\u0300-\u036f]/g, "") // 移除變音符號
+        .replace(/[^\w\s-]/g, "") // 移除特殊字元（保留字母、數字、空格、連字號）
+        .trim() // 去除首尾空格
+        .replace(/[\s_]+/g, "-") // 將空格和底線轉為連字號
+        .replace(/^-+|-+$/g, ""); // 移除首尾的連字號
+}
+
+/**
+ * 生成唯一且安全的 HTML id
+ */
+function generateSafeId(filename) {
+    const baseName = path.parse(filename).name;
+    const slug = slugify(baseName);
+
+    // 生成 8 字元的短 hash 確保唯一性
+    const uniqueHash = nanoid(8);
+
+    // 如果 slug 為空或以數字開頭，加上前綴
+    const needsPrefix = !slug || /^\d/.test(slug);
+    const prefix = needsPrefix ? "img-" : "";
+
+    // 組合：前綴 + slug + hash
+    return `${prefix}${slug}-${uniqueHash}`;
 }
 
 /**
@@ -102,6 +135,8 @@ async function syncGalleryMetadata() {
 
             // 檔案不存在，建立新的
             const metadata = {
+                fileId: `${generateSafeId(baseName)}`,
+                name: baseName,
                 image: `/img/${imageFile}`,
                 description: "",
                 date: "",

@@ -7,6 +7,8 @@ export default defineContentConfig({
             type: "data",
             source: "gallery/**.json",
             schema: z.object({
+                fileId: z.string(),
+                name: z.string(),
                 image: z.string(),
                 description: z.string(),
                 date: z.string(),
