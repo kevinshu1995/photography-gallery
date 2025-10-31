@@ -8,6 +8,14 @@ site_url: https://photograph.hsiu.soy
 media_folder: public/img
 public_folder: /img
 
+media_libraries:
+    default:
+        config:
+            transformations:
+                raster_image: # original format
+                    format: webp
+                    width: 1920
+
 collections:
     - name: "gallery"
       label: "相簿管理"

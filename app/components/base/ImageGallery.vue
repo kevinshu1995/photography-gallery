@@ -1,9 +1,13 @@
 <template>
     <ul class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4" ref="galleryContainer" id="image-gallery">
-        <li v-for="item in formattedGallery" :key="item.image" class="space-y-4">
-            <a :href="item.image" noreferrer :data-pswp-width="item.PixelXDimension" :data-pswp-height="item.PixelYDimension" :id="`gallery-${item.fileId}`">
-                <NuxtImg :src="item.image" densities="x1 x2" placeholder :height="item.PixelYDimension" :width="item.PixelXDimension" loading="lazy" />
+        <li v-for="item in formattedGallery" :key="item.image" class="space-y-2">
+            <a :href="item.image" noreferrer :data-pswp-width="item.PixelXDimension" :data-pswp-height="item.PixelYDimension" :id="`gallery-${item.fileId}`" class="block">
+                <NuxtImg :src="item.image" sizes="100vw sm:50vw md:33vw lg:25vw" placeholder :height="item.PixelYDimension" :width="item.PixelXDimension" loading="lazy" />
             </a>
+
+            <ul class="flex flex-wrap gap-2 text-[14px] text-neutral-500">
+                <li v-for="tag in item.tags" :key="tag">#{{ tag }}</li>
+            </ul>
 
             <!-- INFO 這裡只是用來當作模板，子層會被拿去用 innerHTML 塞到 caption 區塊 （不要移除 hidden） -->
             <div ref="caption" :data-gallery-target="`gallery-${item.fileId}`" class="hidden">
