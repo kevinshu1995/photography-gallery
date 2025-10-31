@@ -93,12 +93,41 @@ function extractExifData(tags) {
             exif[key] = tags?.exif?.[key]?.description ?? null;
         });
     } catch (error) {
-        console.warn("Error extracting EXIF data:", error.message);
+        console.warn("Error extracting EXIF ", error.message);
     }
 
     return {
         ...exif,
     };
+}
+
+/**
+ * 判斷值是否為「空」（沒有值）
+ */
+function isEmpty(value) {
+    if (value === undefined || value === null) return true;
+    if (value === "") return true;
+    if (Array.isArray(value) && value.length === 0) return true;
+    return false;
+}
+
+/**
+ * 合併物件，只更新目標物件中「沒有值」的欄位
+ * @param {Object} existing - 現有的資料（優先保留）
+ * @param {Object} newData - 新的資料
+ * @returns {Object} 合併後的物件
+ */
+function mergeMetadata(existing, newData) {
+    const merged = { ...existing };
+
+    for (const key in newData) {
+        // 如果現有資料沒有這個欄位，或該欄位的值為空，則使用新資料
+        if (!(key in merged) || isEmpty(merged[key])) {
+            merged[key] = newData[key];
+        }
+    }
+
+    return merged;
 }
 
 async function syncGalleryMetadata() {
@@ -109,46 +138,59 @@ async function syncGalleryMetadata() {
     const imageFiles = await fs.readdir(IMAGE_FOLDER);
     const validImages = imageFiles.filter(file => /\.(jpg|jpeg|png|gif|webp)$/i.test(file));
 
-    // // 讀取現有的 metadata 檔案
-    // let existingMetadata = [];
-    // try {
-    //     const metadataFiles = await fs.readdir(METADATA_FOLDER);
-    //     existingMetadata = metadataFiles.filter(f => f.endsWith(".json")).map(f => f.replace(".json", ""));
-    // } catch (err) {
-    //     // 資料夾不存在，忽略
-    // }
-
     // 為每個新圖片建立 metadata 檔案（如果不存在）
     for (const imageFile of validImages) {
         const baseName = path.parse(imageFile).name;
         const metadataPath = path.join(METADATA_FOLDER, `${baseName}.json`);
         const imagePath = path.join(IMAGE_FOLDER, imageFile);
 
+        // 讀取 EXIF 資料
+        const fileBuffer = await fs.readFile(imagePath);
+        const tags = ExifReader.load(fileBuffer, { expanded: true });
+        const exif = extractExifData(tags);
+
+        // 建立新的 metadata 模板
+        const newMetadata = {
+            fileId: `${generateSafeId(baseName)}`,
+            name: baseName,
+            image: `/img/${imageFile}`,
+            description: "",
+            date: "",
+            tags: [],
+            location: "",
+            customLocation: "",
+            published: true,
+            weight: 0,
+            ...exif,
+        };
+
         try {
-            await fs.access(metadataPath);
-            // 檔案已存在，跳過
-            console.log(`✓ Metadata exists: ${baseName}.json`);
-        } catch {
-            const fileBuffer = await fs.readFile(imagePath);
-            const tags = ExifReader.load(fileBuffer, { expanded: true });
-            const exif = extractExifData(tags);
+            // 嘗試讀取現有檔案
+            const existingData = await fs.readFile(metadataPath, "utf-8");
+            const existingMetadata = JSON.parse(existingData);
 
-            // 檔案不存在，建立新的
-            const metadata = {
-                fileId: `${generateSafeId(baseName)}`,
-                name: baseName,
-                image: `/img/${imageFile}`,
-                description: "",
-                date: "",
-                tags: [],
-                location: "",
-                published: true,
-                weight: 0,
-                ...exif,
-            };
+            // 合併資料：保留現有的有值欄位，只更新空欄位
+            const mergedMetadata = mergeMetadata(existingMetadata, newMetadata);
 
-            await fs.writeFile(metadataPath, JSON.stringify(metadata, null, 2));
-            console.log(`✓ Created: ${baseName}.json`);
+            // 寫回檔案
+            await fs.writeFile(metadataPath, JSON.stringify(mergedMetadata, null, 2));
+            console.log(`✓ Updated: ${baseName}.json`);
+        } catch (error) {
+            if (error.code === "ENOENT") {
+                // 檔案不存在的情況
+                try {
+                    await fs.writeFile(metadataPath, JSON.stringify(newMetadata, null, 2));
+                    console.log(`✓ Created: ${baseName}.json`);
+                } catch (writeError) {
+                    console.error(`❌ 無法建立檔案 ${baseName}.json：`, writeError.message);
+                }
+            } else if (error instanceof SyntaxError) {
+                // JSON 解析錯誤
+                console.error(`❌ ${baseName}.json 格式無效：`, error.message);
+            } else {
+                // 其他錯誤
+                console.error(`❌ 處理 ${baseName}.json 時發生錯誤：`, error.message);
+            }
         }
     }
 

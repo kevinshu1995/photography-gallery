@@ -24,5 +24,6 @@
   "Orientation": "top-left",
   "PixelXDimension": 2809,
   "PixelYDimension": 4223,
-  "FocalLength": "55 mm"
+  "FocalLength": "55 mm",
+  "customLocation": ""
 }
