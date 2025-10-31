@@ -1,5 +1,5 @@
 <template>
-    <ul class="relative overflow-hidden">
+    <ul class="relative overflow-hidden text-[20px]">
         <li v-for="text in texts" :key="text" ref="animated-texts">{{ text }}</li>
     </ul>
 </template>
