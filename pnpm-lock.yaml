@@ -29,6 +29,9 @@ importers:
       '@unhead/vue':
         specifier: ^2.0.19
         version: 2.0.19(vue@3.5.22(typescript@5.9.3))
+      animejs:
+        specifier: ^4.2.2
+        version: 4.2.2
       better-sqlite3:
         specifier: ^12.4.1
         version: 12.4.1
@@ -2083,6 +2086,9 @@ packages:
 
   alien-signals@3.0.3:
     resolution: {integrity: sha512-2JXjom6R7ZwrISpUphLhf4htUq1aKRCennTJ6u9kFfr3sLmC9+I4CxxVi+McoFnIg+p1HnVrfLT/iCt4Dlz//Q==}
+
+  animejs@4.2.2:
+    resolution: {integrity: sha512-Ys3RuvLdAeI14fsdKCQy7ytu4057QX6Bb7m4jwmfd6iKmUmLquTwk1ut0e4NtRQgCeq/s2Lv5+oMBjz6c7ZuIg==}
 
   ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
@@ -7899,6 +7905,8 @@ snapshots:
       uri-js: 4.4.1
 
   alien-signals@3.0.3: {}
+
+  animejs@4.2.2: {}
 
   ansi-regex@5.0.1: {}
 
