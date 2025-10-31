@@ -14,6 +14,7 @@ export default defineContentConfig({
                 date: z.string(),
                 tags: z.array(z.string()),
                 location: z.string(),
+                customLocation: z.string(),
                 published: z.boolean(),
                 weight: z.number(),
                 editedTime: z.string(),

@@ -6,7 +6,11 @@
             </a>
 
             <ul class="flex flex-wrap gap-2 text-[14px] text-neutral-500">
-                <li v-for="tag in item.tags" :key="tag">#{{ tag }}</li>
+                <li v-if="item.customLocation || item.location" class="flex items-center gap-1">
+                    <UIcon name="carbon:location" />
+                    <span>{{ item.customLocation || item.location }}</span>
+                </li>
+                <!-- <li v-for="tag in item.tags" :key="tag">#{{ tag }}</li> -->
             </ul>
 
             <!-- INFO 這裡只是用來當作模板，子層會被拿去用 innerHTML 塞到 caption 區塊 （不要移除 hidden） -->
@@ -14,8 +18,14 @@
                 <div>
                     <div class="text-[14px] grid grid-cols-1 sm:grid-cols-[1fr_300px] gap-4">
                         <div>
-                            <p class="text-[16px] font-bold" v-if="item.description">{{ item.description }}</p>
-                            <p>{{ dayjs(item.DateTimeOriginal).format("MMM. YYYY") }}</p>
+                            <p class="text-[16px] font-bold mb-4" v-if="item.description">{{ item.description }}</p>
+                            <div class="flex items-center gap-4 justify-between w-full">
+                                <div v-if="item.customLocation || item.location" class="flex items-center gap-1">
+                                    <UIcon name="carbon:location" />
+                                    <span>{{ item.customLocation || item.location }}</span>
+                                </div>
+                                <p>{{ dayjs(item.DateTimeOriginal).format("MMM. YYYY") }}</p>
+                            </div>
                             <ul class="flex flex-wrap gap-2">
                                 <li v-for="tag in item.tags" :key="tag">#{{ tag }}</li>
                             </ul>
