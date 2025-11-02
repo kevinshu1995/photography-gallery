@@ -3,7 +3,7 @@ export default defineNuxtConfig({
     compatibilityDate: "2025-07-15",
     devtools: { enabled: true },
 
-    modules: ["@nuxt/content", "@nuxt/eslint", "@nuxt/image", "@nuxt/scripts", "@nuxt/ui"],
+    modules: ["@nuxt/content", "@nuxt/eslint", "@nuxt/image", "@nuxt/scripts", "@nuxt/ui", "@vueuse/nuxt"],
 
     css: ["~/assets/css/index.css"],
 
@@ -11,4 +11,3 @@ export default defineNuxtConfig({
         preference: "light",
     },
 });
-
