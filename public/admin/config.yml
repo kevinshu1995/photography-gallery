@@ -19,7 +19,7 @@ collections:
       format: "json"
       identifier_field: "filename"
       fields:
-          - { label: "圖片路徑", name: "image", widget: "image", media_folder: "/public/img", allow_multiple: false, readonly: true }
+          - { label: "圖片路徑", name: "image", widget: "image", media_folder: "/public/img", readonly: true }
           - { label: "描述", name: "description", widget: "text", required: false }
           - { label: "拍攝日期", name: "date", widget: "datetime", required: false }
           - { label: "標籤", name: "tags", widget: "list", allow_add: true, allow_remove: true, required: false }
