@@ -1,6 +1,6 @@
 <template>
     <ul class="relative overflow-hidden text-[20px]">
-        <li v-for="text in texts" :key="text" ref="animated-texts">{{ text }}</li>
+        <li v-for="(text, index) in texts" :key="text" ref="animated-texts" :class="[!hasOnMounted && index !== 0 && 'absolute', !hasOnMounted && 'opacity-0']">{{ text }}</li>
     </ul>
 </template>
 
@@ -21,11 +21,16 @@ const texts = computed(() => {
     ];
 });
 
-onMounted(() => {
+const hasOnMounted = ref(false);
+
+onMounted(async () => {
+    await nextTick();
     if (refTexts.value) {
+        hasOnMounted.value = true;
         const tl = createTimeline({
             loop: true,
-            defaults: { ease: "inOut(3)", duration: 800 },
+            delay: 1000, // 等 h1 動畫完成
+            defaults: { ease: "inOut(3)", duration: 1000 },
         });
         utils.$(refTexts.value).forEach(($text, index) => {
             if (index !== 0) {
@@ -41,6 +46,7 @@ onMounted(() => {
                 {
                     y: ["100%", "0%"],
                     opacity: 1,
+                    delay: 300,
                 },
                 stagger(100, { from: "random" })
             ).add(
@@ -48,7 +54,7 @@ onMounted(() => {
                 {
                     y: ["0%", "-100%"],
                     opacity: 0,
-                    delay: 300,
+                    delay: 800,
                 },
                 stagger(100, { from: "random" })
             );

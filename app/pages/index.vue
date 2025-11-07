@@ -2,7 +2,7 @@
     <UContainer as="main">
         <header class="min-h-[70vh] flex items-center">
             <div>
-                <h1 class="-translate-x-1 uppercase text-[10vw] font-black leading-none">photography</h1>
+                <BaseAnimationHeading class="uppercase text-[10vw] font-black leading-none">photography</BaseAnimationHeading>
                 <BaseTextSlider />
             </div>
         </header>
