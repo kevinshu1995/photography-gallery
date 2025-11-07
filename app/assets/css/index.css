@@ -2,6 +2,6 @@
 @import "@nuxt/ui";
 
 @theme {
-    --font-sans: "Georama", "Noto Sans TC";
+    --font-display: "Bodoni Moda", "Noto Serif TC", serif;
 }
 
