@@ -4,6 +4,9 @@ on:
   schedule:
     # 每 2 小時執行一次（UTC 時間）
     - cron: '0 */2 * * *'
+  push:
+    branches:
+      - master
   workflow_dispatch:
     # 支援手動觸發以便測試
 
@@ -169,4 +172,14 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### ⏰ 執行時間" >> $GITHUB_STEP_SUMMARY
           echo "- **UTC**: $(date -u '+%Y-%m-%d %H:%M:%S')" >> $GITHUB_STEP_SUMMARY
-          echo "- **執行者**: ${{ github.event_name == 'workflow_dispatch' && '手動觸發' || '定時排程' }}" >> $GITHUB_STEP_SUMMARY
+
+          TRIGGER_TYPE="${{ github.event_name }}"
+          if [ "$TRIGGER_TYPE" = "workflow_dispatch" ]; then
+            echo "- **觸發方式**: 🖱️ 手動觸發" >> $GITHUB_STEP_SUMMARY
+          elif [ "$TRIGGER_TYPE" = "push" ]; then
+            echo "- **觸發方式**: 📝 Push 到 master 分支" >> $GITHUB_STEP_SUMMARY
+          elif [ "$TRIGGER_TYPE" = "schedule" ]; then
+            echo "- **觸發方式**: ⏰ 定時排程" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- **觸發方式**: $TRIGGER_TYPE" >> $GITHUB_STEP_SUMMARY
+          fi
