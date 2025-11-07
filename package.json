@@ -17,6 +17,7 @@
         "@nuxt/image": "1.11.0",
         "@nuxt/scripts": "0.13.0",
         "@nuxt/ui": "4.1.0",
+        "@nuxtjs/seo": "^3.2.2",
         "@unhead/vue": "^2.0.19",
         "@vueuse/nuxt": "14.0.0",
         "animejs": "^4.2.2",
