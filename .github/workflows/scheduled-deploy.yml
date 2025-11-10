@@ -10,6 +10,11 @@ on:
   workflow_dispatch:
     # 支援手動觸發以便測試
 
+# 確保同一時間只有一個部署 workflow 執行，避免 cache 衝突
+concurrency:
+  group: vercel-deployment-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   check-and-deploy:
     runs-on: ubuntu-latest
