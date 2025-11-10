@@ -87,10 +87,10 @@ function extractExifData(tags) {
         Object.keys(exif).forEach(key => {
             // 調整至正確格式
             if (["DateTime", "DateTimeOriginal", "DateTimeDigitized"].includes(key)) {
-                exif[key] = formatDateString(tags?.exif?.[key]?.description ?? null);
+                exif[key] = formatDateString(tags?.exif?.[key]?.description ?? "");
                 return;
             }
-            exif[key] = tags?.exif?.[key]?.description ?? null;
+            exif[key] = tags?.exif?.[key]?.description ?? "";
         });
     } catch (error) {
         console.warn("Error extracting EXIF ", error.message);
