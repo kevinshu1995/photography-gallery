@@ -1,19 +1,6 @@
 <template>
     <UContainer as="main">
-        <header class="min-h-[70vh] flex items-center">
-            <div>
-                <BaseAnimationHeading class="uppercase text-[8vw] font-black leading-none">photography</BaseAnimationHeading>
-                <BaseTextSlider />
-            </div>
-        </header>
-        <div class="min-h-screen flex items-center justify-start">
-            <BaseScrollAnimate :configs="{ opacity: { from: 0, to: 1 }, filter: { from: 'blur(10px)', to: 'blur(0px)' } }">
-                <p class="text-[24px]">
-                    This site features work I'm proud to share. <br />
-                    I hope you enjoy it—feel free to <ULink class="underline" to="#contact">reach out</ULink> anytime!
-                </p>
-            </BaseScrollAnimate>
-        </div>
+        <HomeHeader />
         <BaseImageGallery :gallery="gallery" v-if="gallery && gallery.length > 0" />
         <div id="contact" class="flex items-center justify-center pt-70 pb-60">
             <div class="flex flex-col md:flex-row justify-center text-center gap-8 max-w-[600px]">

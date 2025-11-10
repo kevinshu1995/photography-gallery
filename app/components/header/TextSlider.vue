@@ -8,6 +8,10 @@
 import { createTimeline, stagger, utils, splitText } from "animejs";
 import type { Timeline } from "animejs";
 
+const props = defineProps<{
+    delay: number;
+}>();
+
 const { state: isPageAnimationLoaded } = useGlobalPageLoaded();
 
 const refTexts = useTemplateRef("animated-texts");
@@ -34,7 +38,7 @@ onMounted(async () => {
         hasOnMounted.value = true;
         tl.value = createTimeline({
             loop: true,
-            delay: 1000, // 等 h1 動畫完成
+            delay: props.delay, // 等 h1 動畫完成
             defaults: { ease: "inOut(3)", duration: 1000 },
         });
         utils.$(refTexts.value).forEach(($text, index) => {

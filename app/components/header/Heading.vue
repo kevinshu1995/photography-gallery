@@ -8,6 +8,10 @@
 import { createTimeline, stagger, utils, splitText } from "animejs";
 import type { Timeline } from "animejs";
 
+const props = defineProps<{
+    duration: number;
+}>();
+
 const refText = useTemplateRef("animated-text");
 
 const { state: isPageAnimationLoaded } = useGlobalPageLoaded();
@@ -20,7 +24,7 @@ onMounted(async () => {
     if (refText.value) {
         tl.value = createTimeline({
             loop: false,
-            defaults: { ease: "inOut(3)", duration: 1000 },
+            defaults: { ease: "inOut(3)", duration: props.duration },
         });
         const $text = utils.$(refText.value)[0] as HTMLElement;
         const { chars } = splitText($text as HTMLElement, {
