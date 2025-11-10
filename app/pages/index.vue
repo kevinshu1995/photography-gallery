@@ -2,23 +2,25 @@
     <UContainer as="main">
         <header class="min-h-[70vh] flex items-center">
             <div>
-                <BaseAnimationHeading class="uppercase text-[10vw] font-black leading-none">photography</BaseAnimationHeading>
+                <BaseAnimationHeading class="uppercase text-[8vw] font-black leading-none">photography</BaseAnimationHeading>
                 <BaseTextSlider />
             </div>
         </header>
-        <div class="pt-0 pb-40">
-            <p class="text-[24px]">
-                This site features work I'm proud to share. <br />
-                I hope you enjoy it—feel free to <ULink class="underline" to="#contact">reach out</ULink> anytime!
-            </p>
+        <div class="min-h-screen flex items-center justify-start">
+            <BaseScrollAnimate :configs="{ opacity: { from: 0, to: 1 }, filter: { from: 'blur(10px)', to: 'blur(0px)' } }">
+                <p class="text-[24px]">
+                    This site features work I'm proud to share. <br />
+                    I hope you enjoy it—feel free to <ULink class="underline" to="#contact">reach out</ULink> anytime!
+                </p>
+            </BaseScrollAnimate>
         </div>
         <BaseImageGallery :gallery="gallery" v-if="gallery && gallery.length > 0" />
         <div id="contact" class="flex items-center justify-center pt-70 pb-60">
             <div class="flex flex-col md:flex-row justify-center text-center gap-8 max-w-[600px]">
-                <div>
+                <BaseScrollAnimate :configs="{ opacity: { from: 0, to: 1 }, filter: { from: 'blur(10px)', to: 'blur(0px)' } }">
                     <NuxtImg class="max-w-[250px]" src="/me.jpg" alt="" />
-                </div>
-                <div class="space-y-5">
+                </BaseScrollAnimate>
+                <BaseScrollAnimate class="space-y-5" :configs="{ opacity: { from: 0, to: 1 }, filter: { from: 'blur(10px)', to: 'blur(0px)' } }">
                     <p style="text-align: justify">
                         <span class="text-[32px] font-bold">Hey!</span><br />
                         I'm a Taiwan-based engineer who loves photography, usually out on weekends chasing sunrise in the mountains or candid moments on city streets. I focus on landscapes and
@@ -35,7 +37,7 @@
                             <UIcon name="mdi:arrow-top-right" />
                         </ULink>
                     </div>
-                </div>
+                </BaseScrollAnimate>
             </div>
         </div>
     </UContainer>
