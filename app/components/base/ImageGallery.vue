@@ -1,8 +1,8 @@
 <template>
     <ul class="columns-2 md:columns-3 lg:columns-4 gap-2 sm:gap-2 md:gap-4 space-y-2 sm:space-y-2 md:space-y-4" ref="galleryContainer" id="image-gallery">
-        <li v-for="item in formattedGallery" :key="item.image" class="hover:scale-105 transition-all">
+        <li v-for="item in formattedGallery" :key="item.image" class="hover:scale-105 transition-all break-inside-avoid">
             <a :href="item.image" noreferrer :data-pswp-width="item.PixelXDimension" :data-pswp-height="item.PixelYDimension" :id="`gallery-${item.fileId}`" class="block">
-                <NuxtImg :src="item.image" sizes="100vw sm:50vw md:33vw lg:25vw" placeholder :height="item.PixelYDimension" :width="item.PixelXDimension" loading="lazy" class="" />
+                <NuxtImg :src="item.image" sizes="100vw sm:50vw md:33vw lg:25vw" placeholder :height="item.PixelYDimension" :width="item.PixelXDimension" loading="lazy" />
             </a>
 
             <ul v-if="item.customLocation || item.location" class="flex flex-wrap gap-2 text-[14px] text-neutral-500 mt-1">
