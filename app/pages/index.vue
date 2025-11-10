@@ -5,7 +5,7 @@
         <div id="contact" class="flex items-center justify-center pt-70 pb-60">
             <div class="flex flex-col md:flex-row justify-center text-center gap-8 max-w-[600px]">
                 <BaseScrollAnimate :configs="{ opacity: { from: 0, to: 1 }, filter: { from: 'blur(10px)', to: 'blur(0px)' } }">
-                    <NuxtImg class="max-w-[250px]" src="/me.jpg" alt="" />
+                    <NuxtImg class="max-w-[250px]" src="/author.jpg" alt="" />
                 </BaseScrollAnimate>
                 <BaseScrollAnimate class="space-y-5" :configs="{ opacity: { from: 0, to: 1 }, filter: { from: 'blur(10px)', to: 'blur(0px)' } }">
                     <p style="text-align: justify">
