@@ -1,10 +1,13 @@
 <template>
     <div>
-        <slot />
+        <BaseFullPageLoading />
+
+        <div>
+            <slot />
+            <AppFooter />
+        </div>
 
         <AppLinkBubble />
-
-        <AppFooter />
     </div>
 </template>
 

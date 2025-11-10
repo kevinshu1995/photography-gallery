@@ -6,6 +6,9 @@
 
 <script setup lang="ts">
 import { createTimeline, stagger, utils, splitText } from "animejs";
+import type { Timeline } from "animejs";
+
+const { state: isPageAnimationLoaded } = useGlobalPageLoaded();
 
 const refTexts = useTemplateRef("animated-texts");
 
@@ -23,11 +26,13 @@ const texts = computed(() => {
 
 const hasOnMounted = ref(false);
 
+const tl = shallowRef<Timeline | null>(null);
+
 onMounted(async () => {
     await nextTick();
     if (refTexts.value) {
         hasOnMounted.value = true;
-        const tl = createTimeline({
+        tl.value = createTimeline({
             loop: true,
             delay: 1000, // 等 h1 動畫完成
             defaults: { ease: "inOut(3)", duration: 1000 },
@@ -41,24 +46,36 @@ onMounted(async () => {
                 chars: true,
             });
             utils.set(words, { y: "100%", opacity: 0 });
-            tl.add(
-                words,
-                {
-                    y: ["100%", "0%"],
-                    opacity: 1,
-                    delay: 300,
-                },
-                stagger(100, { from: "random" })
-            ).add(
-                words,
-                {
-                    y: ["0%", "-100%"],
-                    opacity: 0,
-                    delay: 800,
-                },
-                stagger(100, { from: "random" })
-            );
+            if (tl.value) {
+                tl.value
+                    .add(
+                        words,
+                        {
+                            y: ["100%", "0%"],
+                            opacity: 1,
+                            delay: 300,
+                        },
+                        stagger(100, { from: "random" })
+                    )
+                    .add(
+                        words,
+                        {
+                            y: ["0%", "-100%"],
+                            opacity: 0,
+                            delay: 800,
+                        },
+                        stagger(100, { from: "random" })
+                    )
+                    .reset();
+            }
         });
+    }
+});
+
+watch(isPageAnimationLoaded, async () => {
+    await nextTick();
+    if (tl.value) {
+        tl.value.play();
     }
 });
 </script>
