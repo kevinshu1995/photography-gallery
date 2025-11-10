@@ -18,9 +18,9 @@
             <!-- INFO 這裡只是用來當作模板，子層會被拿去用 innerHTML 塞到 caption 區塊 （不要移除 hidden） -->
             <div ref="caption" :data-gallery-target="`gallery-${item.fileId}`" class="hidden">
                 <div>
-                    <div class="text-[14px] grid grid-cols-1 sm:grid-cols-[1fr_300px] gap-4">
+                    <div class="text-[14px] grid grid-cols-1 sm:grid-cols-[1fr_200px] gap-4">
                         <div>
-                            <p class="text-[16px] font-bold mb-4" v-if="item.description">{{ item.description }}</p>
+                            <p class="text-[12px] font-bold mb-4" v-if="item.description">{{ item.description }}</p>
                             <div class="flex items-center gap-4 justify-between w-full">
                                 <div v-if="item.customLocation || item.location" class="flex items-center gap-1">
                                     <UIcon name="carbon:location" />
@@ -35,7 +35,7 @@
                         <div class="space-y-2 text-stone-300">
                             <p v-if="item.LensSpecification">{{ item.LensSpecification }}</p>
                             <USeparator v-if="item.LensSpecification" />
-                            <ul class="gap-2 grid grid-cols-2">
+                            <ul class="gap-2 grid grid-cols-1">
                                 <li v-for="detail in item.details" :key="detail.label" class="flex gap-1 items-center">
                                     <UIcon :name="detail.icon" />
                                     <span class="leading-none">{{ detail.label }}</span>
