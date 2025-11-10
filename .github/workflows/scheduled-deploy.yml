@@ -50,7 +50,10 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: .last-deploy-sha
-          key: last-deploy-commit-${{ github.ref }}
+          # 使用前綴模式匹配最新的 cache
+          key: last-deploy-commit-${{ github.ref }}-${{ github.sha }}
+          restore-keys: |
+            last-deploy-commit-${{ github.ref }}-
 
       - name: 讀取上次部署的 SHA
         id: last
@@ -138,14 +141,16 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: .last-deploy-sha
-          key: last-deploy-commit-${{ github.ref }}
+          # 使用包含 SHA 的唯一 key，避免覆寫衝突
+          key: last-deploy-commit-${{ github.ref }}-${{ steps.current.outputs.sha }}
 
       - name: 更新 cache（skip_ci）
         if: steps.should-deploy.outputs.skip_ci == 'true'
         uses: actions/cache/save@v4
         with:
           path: .last-deploy-sha
-          key: last-deploy-commit-${{ github.ref }}
+          # 使用包含 SHA 的唯一 key，避免覆寫衝突
+          key: last-deploy-commit-${{ github.ref }}-${{ steps.current.outputs.sha }}
 
       - name: 生成執行摘要
         if: always()
