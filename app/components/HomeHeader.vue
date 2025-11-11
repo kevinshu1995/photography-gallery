@@ -1,7 +1,7 @@
 <template>
     <header class="min-h-screen flex items-center relative">
         <div>
-            <HeaderHeading class="uppercase text-[18vw] md:text-[10vw] font-black leading-none" :duration="headingDuration">
+            <HeaderHeading class="uppercase text-[18vw] md:text-[9vw] xl:text-[130px] font-black leading-none" :duration="headingDuration">
                 <span class="hidden md:inline">photography</span>
                 <span class="inline md:hidden">photo<br />graphy</span>
             </HeaderHeading>
@@ -29,7 +29,7 @@ const tl = shallowRef<Timeline | null>(null);
 onMounted(async () => {
     await nextTick();
     if (refDescription.value) {
-        tl.value = createTimeline({ delay: headingDuration.value });
+        tl.value = createTimeline({ delay: 2000 });
 
         tl.value
             .add(refDescription.value, {
