@@ -5,8 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { createTimeline, stagger, utils, splitText } from "animejs";
-import type { Timeline } from "animejs";
+import { createTimeline, stagger, utils, splitText, type Timeline } from "animejs";
 
 const props = defineProps<{
     duration: number;

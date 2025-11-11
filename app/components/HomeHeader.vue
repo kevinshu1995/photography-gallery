@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { animate, createTimeline, type Timeline } from "animejs";
+import { createTimeline, type Timeline } from "animejs";
 
 const { state: isPageAnimationLoaded } = useGlobalPageLoaded();
 const headingDuration = ref(1000);

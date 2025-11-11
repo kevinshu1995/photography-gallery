@@ -5,8 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { createTimeline, stagger, utils, splitText } from "animejs";
-import type { Timeline } from "animejs";
+import { createTimeline, stagger, utils, splitText, spring, type Timeline } from "animejs";
 
 const props = defineProps<{
     delay: number;
@@ -55,9 +54,10 @@ onMounted(async () => {
                     .add(
                         words,
                         {
-                            y: ["100%", "0%"],
+                            y: ["200%", "0%"],
                             opacity: 1,
                             delay: 300,
+                            ease: spring({ bounce: 0.3 }),
                         },
                         stagger(100, { from: "random" })
                     )
