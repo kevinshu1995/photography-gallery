@@ -1,18 +1,18 @@
-name: Scheduled Vercel Deployment
+name: Scheduled Cloudflare Deployment
 
 on:
-    # schedule:
-    #   # 每 2 小時執行一次（UTC 時間）
-    #   - cron: '0 */2 * * *'
-    # push:
-    #   branches:
-    #     - master
+    schedule:
+        # 每 2 小時執行一次（UTC 時間）
+        - cron: "0 */2 * * *"
+    push:
+        branches:
+            - master
     workflow_dispatch:
         # 支援手動觸發以便測試
 
 # 確保同一時間只有一個部署 workflow 執行，避免 cache 衝突
 concurrency:
-    group: vercel-deployment-${{ github.ref }}
+    group: cloudflare-deployment-${{ github.ref }}
     cancel-in-progress: false
 
 jobs:
@@ -103,13 +103,13 @@ jobs:
                     echo "skip_ci=false" >> $GITHUB_OUTPUT
                   fi
 
-            - name: 觸發 Vercel 部署
+            - name: 觸發 Cloudflare 部署
               if: steps.should-deploy.outputs.deploy == 'true'
               id: deploy
               run: |
-                  echo "🚀 正在觸發 Vercel 部署..."
+                  echo "🚀 正在觸發 Cloudflare 部署..."
 
-                  RESPONSE=$(curl -X POST "${{ secrets.VERCEL_DEPLOY_HOOK_URL }}" \
+                  RESPONSE=$(curl -X POST "${{ secrets.CLOUDFLARE_DEPLOY_HOOK_URL }}" \
                     -H "Content-Type: application/json" \
                     -w "\nHTTP_CODE:%{http_code}" \
                     -s)
@@ -120,10 +120,10 @@ jobs:
                   echo "HTTP Status Code: $HTTP_CODE"
 
                   if [ "$HTTP_CODE" = "200" ] || [ "$HTTP_CODE" = "201" ] || [ "$HTTP_CODE" = "204" ]; then
-                    echo "✅ Vercel 部署已成功觸發"
+                    echo "✅ Cloudflare 部署已成功觸發"
                     echo "status=success" >> $GITHUB_OUTPUT
                   else
-                    echo "❌ Vercel 部署觸發失敗 (HTTP $HTTP_CODE)"
+                    echo "❌ Cloudflare 部署觸發失敗 (HTTP $HTTP_CODE)"
                     echo "回應內容: $BODY"
                     echo "status=failed" >> $GITHUB_OUTPUT
                     exit 1
@@ -187,9 +187,9 @@ jobs:
                     echo "- **原因**: ${{ steps.should-deploy.outputs.reason }}" >> $GITHUB_STEP_SUMMARY
 
                     if [ "${{ steps.deploy.outputs.status }}" = "success" ]; then
-                      echo "- **狀態**: 🚀 Vercel 部署已成功觸發" >> $GITHUB_STEP_SUMMARY
+                      echo "- **狀態**: 🚀 Cloudflare 部署已成功觸發" >> $GITHUB_STEP_SUMMARY
                     else
-                      echo "- **狀態**: ❌ Vercel 部署觸發失敗" >> $GITHUB_STEP_SUMMARY
+                      echo "- **狀態**: ❌ Cloudflare 部署觸發失敗" >> $GITHUB_STEP_SUMMARY
                     fi
                   else
                     echo "- **決定**: ⏭️ 跳過部署" >> $GITHUB_STEP_SUMMARY
