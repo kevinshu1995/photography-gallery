@@ -3,6 +3,7 @@
     "type": "module",
     "private": true,
     "scripts": {
+        "build:cloudflare": "npm -g install pnpm && pnpm run build",
         "build": "nuxt build",
         "dev": "nuxt dev",
         "generate": "nuxt generate",
@@ -42,3 +43,4 @@
         }
     }
 }
+
