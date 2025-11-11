@@ -1,5 +1,5 @@
 <template>
-    <div :class="['fixed inset-x-0 bottom-0 pb-6 px-8 flex items-center justify-end', !!refContainer || 'opacity-0']" ref="container">
+    <div :class="['fixed inset-x-0 bottom-0 pb-6 px-8 flex items-center justify-center md:justify-end', !!refContainer || 'opacity-0']" ref="container">
         <div class="rounded-full backdrop-blur bg-white/70 border border-gray-100 shadow-xl/10 py-1 px-4 flex items-center transition-all hover:scale-105">
             <div v-for="link in sites" :key="link.link" class="inline-block overflow-hidden" ref="siteLinks">
                 <UButton size="lg" class="cursor-pointer text-highlighted gap-0" target="_blank" :to="link.link" variant="link" color="neutral">

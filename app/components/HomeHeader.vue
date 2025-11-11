@@ -1,11 +1,14 @@
 <template>
     <header class="min-h-screen flex items-center relative">
         <div>
-            <HeaderHeading class="uppercase text-[8vw] font-black leading-none" :duration="headingDuration">photography</HeaderHeading>
+            <HeaderHeading class="uppercase text-[18vw] md:text-[10vw] font-black leading-none" :duration="headingDuration">
+                <span class="hidden md:inline">photography</span>
+                <span class="inline md:hidden">photo<br />graphy</span>
+            </HeaderHeading>
             <HeaderTextSlider :delay="headingDuration" />
         </div>
-        <div class="absolute left-0 bottom-0 mb-8 flex items-center justify-start">
-            <p ref="description" :class="['text-[24px]', !!refDescription || 'opacity-0']">
+        <div class="absolute left-0 bottom-0 mb-32 md:mb-8 flex items-center justify-start">
+            <p ref="description" :class="['text-[14px] sm:text-[16px] md:text-[20px] lg:text-[24px]', !!refDescription || 'opacity-0']">
                 This site features work I'm proud to share. <br />
                 I hope you enjoy it—feel free to <ULink class="underline" to="#contact">reach out</ULink> anytime!
             </p>
