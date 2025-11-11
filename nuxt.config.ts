@@ -4,6 +4,12 @@ export default defineNuxtConfig({
     devtools: { enabled: true },
     app: {
         head: {
+            meta: [
+                {
+                    name: "google-site-verification",
+                    content: "2ZRxTX7x_ZhaBhPq3H4vU4IBPyl4x_zCxEUbb93zl-w",
+                },
+            ],
             link: [
                 { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
                 { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
