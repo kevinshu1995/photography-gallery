@@ -72,7 +72,12 @@ jobs:
         run: |
           CURRENT="${{ steps.current.outputs.sha }}"
           LAST="${{ steps.last.outputs.sha }}"
-          COMMIT_MSG="${{ steps.current.outputs.message }}"
+
+          # 使用 heredoc 安全地讀取 commit message，避免 shell 解釋特殊字符（如反引號）
+          COMMIT_MSG=$(cat <<'EOF'
+          ${{ steps.current.outputs.message }}
+          EOF
+          )
 
           # 檢查 commit message 是否包含 [skip_ci]
           if echo "$COMMIT_MSG" | grep -q "\[skip_ci\]"; then
