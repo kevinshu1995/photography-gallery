@@ -8,11 +8,12 @@
                     <NuxtImg class="max-w-[250px]" src="/author.jpg" alt="" />
                 </BaseScrollAnimate>
                 <BaseScrollAnimate class="space-y-5" :configs="{ opacity: { from: 0, to: 1 }, filter: { from: 'blur(10px)', to: 'blur(0px)' } }">
-                    <p style="text-align: justify">
-                        <span class="text-[32px] font-bold">Hey!</span><br />
-                        I'm a Taiwan-based engineer who loves photography, usually out on weekends chasing sunrise in the mountains or candid moments on city streets. I focus on landscapes and
-                        portraits, working with natural light to keep things honest and heartfelt. This site collects moments I’m proud to share—feel free to look around or say hi anytime.
-                    </p>
+                    <div class="text-left space-y-3">
+                        <p class="text-[32px] font-bold">Hey!</p>
+                        <p>I'm a Taiwan-based engineer who loves photography, usually out on weekends chasing sunrise in the mountains or candid moments on city streets.</p>
+                        <p>I focus on landscapes and portraits, working with natural light to keep things honest and heartfelt. This site collects moments I’m proud to share</p>
+                        <p>feel free to look around or say hi anytime.</p>
+                    </div>
                     <div class="flex flex-col gap-3 items-start w-full">
                         <ULink class="flex items-center gap-1 underline" to="https://www.instagram.com/kevinshu">
                             <span class="leading-none">Instagram</span>
